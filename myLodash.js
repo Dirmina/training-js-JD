@@ -108,6 +108,7 @@ MyLodash.sortBy = function (array, extra) {
  */
 MyLodash.xor = function (array, extra) {
     let symmetricDifference = []
+    function forXor (array, extra) {
     for (let i=0; i < array.length; i++) {
         let same = false;
         for (let j= 0; j < extra.length; j++) {
@@ -119,18 +120,12 @@ MyLodash.xor = function (array, extra) {
             symmetricDifference.push(array[i])
         }
     }
-
-    for (let j=0; j < extra.length; j++) {
-        let same = false;
-        for (let i= 0; i < array.length; i++) {
-            if (extra[j] === array[i]) {
-                same = true;
-            }
-        }
-        if (!same) {
-            symmetricDifference.push(extra[j])
-        }
+    return symmetricDifference;
     }
+    
+    forXor(array, extra);
+    forXor(extra, array);
+
     return symmetricDifference
 }
 
@@ -145,11 +140,7 @@ MyLodash.groupBy = function (array, extra) {
     for (let i = 0; i < array.length; i++) {
         let flooredValue = extra(array[i])
         if (!groupedBy[flooredValue]) {
-            Object.defineProperty(groupedBy, extra(array[i]), {
-                value: [array[i]],
-                writable: true,
-                enumerable: true
-            })
+            groupedBy[extra(array[i])] = [array[i]]
         }
         else {
             groupedBy[flooredValue].push(array[i])

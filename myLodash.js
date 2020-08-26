@@ -183,7 +183,8 @@ MyLodash.defaultsDeep = function (object, extra) {
             else {
                 if (property !== extraProperty) {
                     //ajout
-                    console.log("différent je dois l'ajouter")
+                    object[extraProperty] = extra[extraProperty]
+                    console.log(object[property])
                 }
             }
         }

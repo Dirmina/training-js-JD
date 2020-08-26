@@ -173,17 +173,22 @@ MyLodash.defaultsDeep = function (object, extra) {
     //Si c'est un objet on revérifie que chaque propriété est un objet (recursivité)
     //Quand il n'y a plus d'object (boucle while finie)
     //si l'object de mm profondeur ne possède pas la propriété alors on l'ajoute a object1 (et là il faut creuser)
-    /*for (let key of Object.keys(object)) {
-        for (let extraKey of Object.keys(extra)) {
-            if (key !== extraKey) {
-                Object.defineProperty(object, extraKey, {
-                    value: extra[extraKey],
-                    writable: true,
-                    enumerable: true
-                })
+    for(let property in object) {
+        for(let extraProperty in extra) {
+            typeA = typeof object[property]
+            typeB = typeof extra[extraProperty]
+            if (typeA = 'object' && typeB === 'object') {
+                MyLodash.defaultsDeep(object[property], extra[extraProperty])
+            }
+            else {
+                if (property !== extraProperty) {
+                    //ajout
+                    console.log("différent je dois l'ajouter")
+                }
             }
         }
-        type = typeof object[key];*/
+    }
+    return object;
 }
 
 module.exports = MyLodash;
